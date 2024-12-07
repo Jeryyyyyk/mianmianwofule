@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>眠眠ZZz 虚拟主播简介</title>
+<style>
+  body {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f5f7ff 30%, #dbf3fa 90%);
+    color: #444;
+  }
+
+  header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  header::before {
+    content: "";
+    background: url('images/stars.png') no-repeat center / contain;
+    opacity: 0.3;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+  }
+
+  header img {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+
+  header h1 {
+    font-size: 2em;
+    margin: 15px 0 10px 0;
+    color: #333;
+    position: relative;
+  }
+
+  header h1::after {
+    content: "😸";
+    display: inline-block;
+    margin-left: 10px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  header p {
+    margin: 0;
+    font-size: 1em;
+    color: #777;
+  }
+
+  main {
+    max-width: 800px;
+    margin: 30px auto;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    padding: 20px 30px 40px;
+    position: relative;
+  }
+
+  main::before {
+    content: "";
+    background: url('images/cute-cat.png') no-repeat center / 100px 100px;
+    opacity: 0.1;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+  }
+
+  section {
+    margin-bottom: 40px;
+  }
+
+  section h2, section h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 40px;
+    color: #333;
+  }
+
+  section h2::before, section h3::before {
+    content: "🌸";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2em;
+  }
+
+  .intro-section p {
+    margin: 10px 0;
+    line-height: 1.8;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+  }
+
+  .tags span {
+    background: #ffe0ec;
+    font-size: 0.9em;
+    color: #666;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #ffd1e3;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .tags span::before {
+    content: "💖";
+  }
+
+  .schedule p, .rules p, .levels p {
+    margin: 5px 0;
+    line-height: 1.6;
+  }
+
+  a {
+    color: #ff7fa8;
+    text-decoration: none;
+    border-bottom: 1px dashed #ff7fa8;
+  }
+  a:hover {
+    background: #ff7fa8;
+    color: #fff;
+    border-bottom: none;
+    transition: all 0.3s ease;
+  }
+
+  .view-ranking-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff7fa8;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 20px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s ease;
+    text-decoration: none;
+  }
+
+  .view-ranking-btn:hover {
+    background: #e6678f;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #aaa;
+    border-top: 1px solid #eee;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(5px);
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <img src="images/avatar.jpg" alt="眠眠ZZz的头像">
+  <h1>眠眠ZZz</h1>
+  <p>梦想是做最幸福的小猫~ (来自星书社)</p>
+</header>
+
+<main>
+  <section class="intro-section">
+    <h2>自我介绍</h2>
+    <p>眠眠ZZz是一位活跃于抖音平台的虚拟主播，她希望能将「喜欢唱歌」变成「喜欢又擅长的事」。这里是她的个人空间，欢迎来到充满温柔歌声与可爱氛围的小世界。</p>
+    <p>在这里，你可以欣赏眠眠ZZz的歌唱、互动直播，以及充满创意的短视频内容。她的目标是让每一位观众都能在歌声与欢乐中找到片刻的轻松与愉悦。</p>
+
+    <div class="tags">
+      <span>歌手系Vup</span>
+      <span>猫猫属性</span>
+      <span>星书社成员</span>
+      <span>抖音ID: o3mmm</span>
+    </div>
+  </section>
+
+  <section class="schedule">
+    <h3>直播时间</h3>
+    <p>下午场：14:00 开始</p>
+    <p>晚间场：22:00 开始</p>
+    <p><small>（具体档期可能灵活调整，请以当日通知为准）</small></p>
+  </section>
+
+  <section class="levels">
+    <h3>粉丝牌特权</h3>
+    <p>8级牌牌：解锁可爱举牌头像！</p>
+    <p>11级牌牌：解锁神秘小周边！</p>
+    <p>单推后缀：zzz</p>
+  </section>
+
+  <section class="rules">
+    <h3>版权与说明</h3>
+    <p>【已注册版权 未经允许请勿二创】</p>
+    <p>本频道所有内容仅供粉丝与观众欣赏，未经许可请勿擅自转载、二次创作或商用。</p>
+  </section>
+
+  <!-- 新增排行榜按钮 -->
+  <div style="text-align:center;">
+    <a href="comment.html" class="view-ranking-btn">查看 评论区</a>
+  </div>
+</main>
+
+<footer>
+  <p>© 2024 眠眠ZZz | 感谢你的关注与支持 | 喵~</p>
+</footer>
+
+</body>
+</html>

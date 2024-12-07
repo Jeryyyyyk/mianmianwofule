@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留言区 - 眠眠ZZz</title>
+<style>
+  body {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(45deg, #ffecf0, #fff6f9);
+    background-size: 600% 600%;
+    animation: gradientBackground 10s ease infinite;
+  }
+
+  @keyframes gradientBackground {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  header {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #f8d7da;
+  }
+
+  header h1 {
+    font-size: 1.8em;
+    color: #444;
+    margin: 0;
+    position: relative;
+  }
+
+  header h1::after {
+    content: "💬";
+    margin-left: 10px;
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0);}
+    50% { transform: translateY(-5px);}
+  }
+
+  .container {
+    flex: 1;
+    max-width: 700px;
+    margin: 30px auto;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .comment-form label {
+    font-size: 1em;
+    color: #444;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .comment-form input[type="text"], .comment-form textarea {
+    width: 100%;
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .comment-form textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .comment-form button {
+    align-self: flex-end;
+    background: #ff7fa8;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .comment-form button:hover {
+    background: #e6678f;
+  }
+
+  .comments-display {
+    margin-bottom: 20px;
+  }
+
+  .comments-display h2 {
+    font-size: 1.2em;
+    color: #444;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 30px;
+  }
+
+  .comments-display h2::before {
+    content: "🐱";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2em;
+  }
+
+  .comment-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 10px;
+    position: relative;
+  }
+
+  .comment-author {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .comment-author span {
+    font-size: 0.8em;
+    background: #ff7fa8;
+    color: #fff;
+    border-radius: 5px;
+    padding: 2px 6px;
+  }
+
+  .comment-text {
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.4;
+    margin: 5px 0 0;
+  }
+
+  .comment-item.broadcaster {
+    background: linear-gradient(90deg, #fff7c2, #fff0b3);
+    border: 1px solid #ffec99;
+  }
+
+  .expand-btn {
+    display: inline-block;
+    background: #ff7fa8;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .expand-btn:hover {
+    background: #e6678f;
+  }
+
+  nav {
+    text-align: center;
+    padding: 20px;
+  }
+
+  nav a {
+    color: #ff7fa8;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #ff7fa8;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+
+  nav a:hover {
+    background: #ff7fa8;
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>留言区</h1>
+</header>
+
+<div class="container">
+  <!-- 留言表单区域 -->
+  <div class="comment-form">
+    <label for="username">你的昵称(若为空则显示匿名)：</label>
+    <input type="text" id="username" placeholder="请输入你的昵称">
+
+    <label for="comment">写下你的留言：</label>
+    <textarea id="comment" placeholder="说点什么吧..."></textarea>
+    <button type="button" id="submitBtn">提交留言</button>
+  </div>
+
+  <div class="comments-display">
+    <h2>最新评论</h2>
+    <div id="commentsContainer">
+      <!-- 评论列表将通过JS动态插入 -->
+    </div>
+    <div style="text-align: center; margin-top:20px;">
+      <button id="expandBtn" class="expand-btn" style="display:none;">展开全部</button>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html">返回主页</a>
+</nav>
+
+<script>
+// 秘密语（仅博主知晓）
+const SECRET_CODE = "哈哈欧尼酱";
+// 使用 localStorage 来储存是否是主播
+let isBroadcaster = localStorage.getItem('isBroadcaster') === 'true';
+
+const submitBtn = document.getElementById('submitBtn');
+const expandBtn = document.getElementById('expandBtn');
+
+// 加载评论列表
+function loadComments(showAll = false) {
+  fetch('/api/comments')
+    .then(response => response.json())
+    .then(data => {
+      renderComments(data, showAll);
+    });
+}
+
+submitBtn.addEventListener('click', () => {
+  const nameInput = document.getElementById('username');
+  const commentInput = document.getElementById('comment');
+
+  let authorName = nameInput.value.trim() || '匿名';
+  const commentText = commentInput.value.trim();
+
+  // 检查是否输入秘密语成为主播
+  if (authorName === SECRET_CODE) {
+    isBroadcaster = true;
+    localStorage.setItem('isBroadcaster', 'true');
+    authorName = '眠眠ZZz';
+  }
+
+  if (commentText) {
+    fetch('/api/comments', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        author: authorName,
+        text: commentText,
+        isBroadcaster: isBroadcaster
+      })
+    })
+    .then(res => res.json())
+    .then(result => {
+      if (result.success) {
+        commentInput.value = '';
+        loadComments();
+      }
+    });
+  }
+});
+
+expandBtn.addEventListener('click', () => {
+  fetch('/api/comments')
+    .then(response => response.json())
+    .then(data => {
+      renderComments(data, true);
+      expandBtn.style.display = 'none';
+    });
+});
+
+function renderComments(data, showAll = false) {
+  const container = document.getElementById('commentsContainer');
+  container.innerHTML = '';
+
+  const commentCount = data.length;
+  const defaultCount = 5;
+  let displayCount = showAll ? commentCount : Math.min(commentCount, defaultCount);
+
+  for (let i = 0; i < displayCount; i++) {
+    const c = data[commentCount - 1 - i]; // 显示最新的评论在前
+    const item = document.createElement('div');
+    item.classList.add('comment-item');
+    if (c.isBroadcaster) {
+      item.classList.add('broadcaster');
+    }
+
+    const author = document.createElement('p');
+    author.classList.add('comment-author');
+
+    if (c.isBroadcaster) {
+      const badge = document.createElement('span');
+      badge.textContent = '主播';
+      author.appendChild(badge);
+      author.appendChild(document.createTextNode(' ' + c.author));
+    } else {
+      author.textContent = c.author;
+    }
+
+    const text = document.createElement('p');
+    text.classList.add('comment-text');
+    text.textContent = c.text;
+
+    item.appendChild(author);
+    item.appendChild(text);
+    container.appendChild(item);
+  }
+
+  if (commentCount > defaultCount && !showAll) {
+    expandBtn.style.display = 'inline-block';
+  } else {
+    expandBtn.style.display = 'none';
+  }
+}
+
+// 页面加载后获取评论列表
+document.addEventListener('DOMContentLoaded', () => {
+  loadComments();
+});
+</script>
+
+</body>
+</html>
